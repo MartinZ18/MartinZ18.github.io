@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Martín Zamora — Backend &amp; AI Automation</title>
+<meta name="description" content="Backend developer en Mendoza, Argentina. APIs REST con FastAPI y Spring Boot, y automatización de procesos con n8n e IA. Sistemas en producción con usuarios reales.">
+<meta property="og:title" content="Martín Zamora — Backend &amp; AI Automation">
+<meta property="og:description" content="APIs REST y automatización con IA. Sistemas en producción, no ejercicios de curso.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231B4DFF'/><text y='72' x='50' text-anchor='middle' font-size='62' font-family='monospace' font-weight='700' fill='white'>MZ</text></svg>">
+
+<style>
+:root{
+  --ground:#EFF0F2;
+  --surface:#FFFFFF;
+  --surface-2:#E5E7EB;
+  --ink:#10151C;
+  --ink-2:#39424F;
+  --muted:#626D7C;
+  --line:#D6DAE0;
+  --line-strong:#B4BBC6;
+  --accent:#1B4DFF;
+  --accent-ink:#1339C4;
+  --accent-soft:#E3E9FF;
+  --ok:#15803D;
+  --ok-soft:#DEF2E4;
+  --warn:#92400E;
+  --warn-soft:#F6EBDA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0B0D11;
+    --surface:#12161C;
+    --surface-2:#1A1F27;
+    --ink:#E9EBEF;
+    --ink-2:#C2C8D2;
+    --muted:#8B94A3;
+    --line:#232932;
+    --line-strong:#39414D;
+    --accent:#7594FF;
+    --accent-ink:#93ABFF;
+    --accent-soft:#161E39;
+    --ok:#6FCB8B;
+    --ok-soft:#12271A;
+    --warn:#DFA75B;
+    --warn-soft:#2C2113;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0B0D11;
+  --surface:#12161C;
+  --surface-2:#1A1F27;
+  --ink:#E9EBEF;
+  --ink-2:#C2C8D2;
+  --muted:#8B94A3;
+  --line:#232932;
+  --line-strong:#39414D;
+  --accent:#7594FF;
+  --accent-ink:#93ABFF;
+  --accent-soft:#161E39;
+  --ok:#6FCB8B;
+  --ok-soft:#12271A;
+  --warn:#DFA75B;
+  --warn-soft:#2C2113;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Archivo","Helvetica Neue",Arial,sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  padding-inline:20px;
+}
+
+.shell{max-width:1180px;margin:0 auto}
+
+/* ---------- rail ---------- */
+.layout{display:block}
+@media (min-width:960px){
+  .layout{display:grid;grid-template-columns:216px 1fr;gap:64px;align-items:start}
+  .rail{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;padding-block:40px}
+}
+.rail{padding-block:28px 0}
+.rail .mark{
+  font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:20px;
+}
+.rail nav{display:none}
+@media (min-width:960px){
+  .rail nav{display:flex;flex-direction:column;gap:9px;margin-bottom:28px}
+}
+.rail nav a{
+  font-family:"IBM Plex Mono",monospace;font-size:.76rem;letter-spacing:.05em;
+  color:var(--muted);text-decoration:none;padding:2px 0;border-bottom:1px solid transparent;
+  width:fit-content;
+}
+.rail nav a:hover{color:var(--ink);border-bottom-color:var(--accent)}
+.rail .railfoot{
+  font-family:"IBM Plex Mono",monospace;font-size:.7rem;line-height:1.7;color:var(--muted);
+  display:none;
+}
+@media (min-width:960px){.rail .railfoot{display:block}}
+.rail .railfoot a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line-strong)}
+.rail .railfoot a:hover{color:var(--accent-ink);border-bottom-color:var(--accent)}
+
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* ---------- hero ---------- */
+.hero{padding-block:clamp(36px,7vw,84px) clamp(30px,5vw,54px)}
+.hero h1{
+  font-size:clamp(2.6rem,7.2vw,5.1rem);
+  font-weight:800;letter-spacing:-.035em;line-height:.98;
+  margin:0 0 22px;text-wrap:balance;
+}
+.hero .thesis{
+  font-family:"Newsreader",Georgia,serif;
+  font-size:clamp(1.18rem,2.4vw,1.55rem);
+  line-height:1.48;color:var(--ink-2);max-width:44ch;margin:0 0 8px;
+}
+.hero .thesis b{color:var(--ink);font-weight:500}
+
+.facts{
+  display:flex;flex-wrap:wrap;gap:0;margin:34px 0 0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.fact{
+  flex:1 1 150px;padding:14px 18px 14px 0;
+  border-right:1px solid var(--line);
+}
+.fact:last-child{border-right:none}
+.fact .k{
+  font-family:"IBM Plex Mono",monospace;font-size:.64rem;font-weight:500;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px;
+}
+.fact .v{font-weight:700;font-size:1rem;letter-spacing:-.01em}
+.fact .v.live{color:var(--ok)}
+
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:"IBM Plex Mono",monospace;font-size:.78rem;font-weight:500;letter-spacing:.04em;
+  padding:10px 16px;border-radius:2px;text-decoration:none;border:1px solid var(--line-strong);
+  color:var(--ink);background:var(--surface);
+}
+.btn:hover{border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent-ink);border-color:var(--accent-ink);color:#fff}
+
+/* ---------- sections ---------- */
+section{padding-block:clamp(40px,6vw,72px);border-top:1px solid var(--line)}
+.shead{margin-bottom:34px;max-width:60ch}
+.shead .num{
+  font-family:"IBM Plex Mono",monospace;font-size:.66rem;font-weight:600;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--accent);
+  display:block;margin-bottom:10px;
+}
+.shead h2{
+  font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:700;letter-spacing:-.028em;
+  margin:0 0 12px;line-height:1.06;text-wrap:balance;
+}
+.shead p{font-family:"Newsreader",Georgia,serif;font-size:1.08rem;line-height:1.6;color:var(--muted);margin:0}
+
+/* ---------- projects ---------- */
+.proj{
+  padding-block:30px;border-top:1px solid var(--line);
+  display:grid;gap:20px;
+}
+.proj:first-of-type{border-top:none;padding-top:0}
+@media (min-width:820px){
+  .proj{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:44px}
+}
+.proj .lead h3{
+  font-size:1.45rem;font-weight:700;letter-spacing:-.022em;margin:0 0 8px;line-height:1.12;
+}
+.proj .meta{
+  font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.05em;
+  color:var(--muted);margin:0 0 16px;line-height:1.7;
+}
+.proj .meta .sep{color:var(--line-strong);padding:0 4px}
+.proj .desc{font-family:"Newsreader",Georgia,serif;font-size:1.05rem;line-height:1.62;color:var(--ink-2);margin:0 0 14px;max-width:52ch}
+.proj .links{display:flex;flex-wrap:wrap;gap:14px;margin-top:16px}
+.proj .links a{
+  font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.04em;
+  color:var(--accent-ink);text-decoration:none;border-bottom:1px solid var(--accent-soft);padding-bottom:1px;
+}
+.proj .links a:hover{border-bottom-color:var(--accent)}
+
+.detail{
+  background:var(--surface);border:1px solid var(--line);border-radius:3px;
+  padding:18px 20px;align-self:start;
+}
+.detail .dl{
+  font-family:"IBM Plex Mono",monospace;font-size:.62rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  display:block;margin-bottom:12px;
+}
+.detail ul{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+.detail li{
+  font-size:.9rem;line-height:1.5;padding-left:16px;position:relative;color:var(--ink-2);
+}
+.detail li::before{
+  content:"";position:absolute;left:0;top:.55em;width:6px;height:1px;background:var(--accent);
+}
+.detail li b{color:var(--ink);font-weight:600}
+
+.tag{
+  display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.62rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:2px;
+  background:var(--ok-soft);color:var(--ok);margin-left:8px;vertical-align:2px;
+}
+.tag.q{background:var(--accent-soft);color:var(--accent-ink)}
+
+/* ---------- case study ---------- */
+.case{background:var(--surface);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.case .top{padding:26px 26px 0}
+.case .top h3{font-size:1.35rem;font-weight:700;letter-spacing:-.02em;margin:0 0 10px}
+.case .top p{font-family:"Newsreader",Georgia,serif;font-size:1.05rem;line-height:1.62;color:var(--ink-2);margin:0 0 16px;max-width:62ch}
+.case .top p:last-child{margin-bottom:26px}
+.case .top strong{color:var(--ink);font-weight:500}
+
+.probe{
+  display:grid;gap:1px;background:var(--line);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+@media (min-width:640px){.probe{grid-template-columns:repeat(3,1fr)}}
+.probe .cell{background:var(--surface-2);padding:16px 20px}
+.probe .cell .k{
+  font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;
+}
+.probe .cell .v{
+  font-family:"IBM Plex Mono",monospace;font-size:1.5rem;font-weight:600;
+  font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:-.02em;
+}
+.probe .cell:last-child .v{color:var(--accent-ink)}
+
+.case .bottom{padding:22px 26px 26px}
+.case .bottom .lbl{
+  font-family:"IBM Plex Mono",monospace;font-size:.62rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:10px;
+}
+.case .bottom p{font-family:"Newsreader",Georgia,serif;font-size:1.05rem;line-height:1.62;margin:0;color:var(--ink-2);max-width:62ch}
+.case .bottom p + p{margin-top:.8em}
+.case code,.mono{font-family:"IBM Plex Mono",monospace;font-size:.86em}
+.case code{background:var(--accent-soft);color:var(--accent-ink);padding:1px 5px;border-radius:2px}
+
+/* ---------- principles ---------- */
+.prin{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px}
+@media (min-width:760px){.prin{grid-template-columns:repeat(3,1fr)}}
+.prin .p{background:var(--surface);padding:24px}
+.prin .p .n{
+  font-family:"IBM Plex Mono",monospace;font-size:.68rem;font-weight:600;
+  letter-spacing:.1em;color:var(--accent);display:block;margin-bottom:12px;
+}
+.prin .p h4{font-size:1.02rem;font-weight:700;letter-spacing:-.015em;margin:0 0 8px;line-height:1.25}
+.prin .p p{font-family:"Newsreader",Georgia,serif;font-size:.98rem;line-height:1.55;color:var(--muted);margin:0}
+
+/* ---------- stack ---------- */
+.stack{display:grid;gap:26px}
+@media (min-width:700px){.stack{grid-template-columns:repeat(2,1fr);gap:26px 44px}}
+.stack .grp .h{
+  font-family:"IBM Plex Mono",monospace;font-size:.64rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  display:block;padding-bottom:8px;margin-bottom:12px;border-bottom:1px solid var(--line);
+}
+.stack .grp .items{font-size:.95rem;line-height:1.85;color:var(--ink-2)}
+.stack .grp .items b{color:var(--ink);font-weight:600}
+
+/* ---------- contact ---------- */
+.contact{display:flex;flex-wrap:wrap;gap:30px 56px;align-items:flex-start}
+.contact .blk .k{
+  font-family:"IBM Plex Mono",monospace;font-size:.64rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;
+}
+.contact .blk a,.contact .blk span{
+  font-size:1.06rem;font-weight:600;letter-spacing:-.01em;color:var(--ink);
+  text-decoration:none;border-bottom:1px solid var(--line-strong);
+}
+.contact .blk a:hover{color:var(--accent-ink);border-bottom-color:var(--accent)}
+.contact .blk span{border-bottom:none}
+
+footer{
+  padding-block:34px 56px;border-top:1px solid var(--line);
+  font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+<div class="layout">
+
+  <aside class="rail">
+    <div class="mark">MZ / Mendoza AR</div>
+    <nav aria-label="Secciones">
+      <a href="#proyectos">01 — Proyectos</a>
+      <a href="#bug">02 — Un bug</a>
+      <a href="#metodo">03 — Cómo trabajo</a>
+      <a href="#stack">04 — Stack</a>
+      <a href="#contacto">05 — Contacto</a>
+    </nav>
+    <div class="railfoot">
+      <a href="mailto:martin.zamora004@gmail.com">Email</a><br>
+      <a href="https://github.com/MartinZ18">GitHub</a><br>
+      <a href="https://www.linkedin.com/in/martin-zamora-3893b8295">LinkedIn</a>
+    </div>
+  </aside>
+
+  <main>
+
+    <header class="hero">
+      <h1>Martín<br>Zamora</h1>
+      <p class="thesis">Construyo APIs REST y saco procesos manuales del medio con automatización e IA. <b>Tengo software en producción usándose todos los días</b> en un instituto de Mendoza.</p>
+
+      <div class="facts">
+        <div class="fact">
+          <span class="k">Estado</span>
+          <span class="v live">Disponible</span>
+        </div>
+        <div class="fact">
+          <span class="k">Modalidad</span>
+          <span class="v">Remoto · Mendoza</span>
+        </div>
+        <div class="fact">
+          <span class="k">Backend</span>
+          <span class="v">FastAPI · Spring Boot</span>
+        </div>
+        <div class="fact">
+          <span class="k">Automatización</span>
+          <span class="v">n8n · RAG · LLMs</span>
+        </div>
+      </div>
+
+      <div class="cta">
+        <a class="btn primary" href="mailto:martin.zamora004@gmail.com">Escribime</a>
+        <a class="btn" href="https://github.com/MartinZ18">Ver el código</a>
+        <a class="btn" href="#bug">Un bug que vale contar</a>
+      </div>
+    </header>
+
+    <!-- ===== PROYECTOS ===== -->
+    <section id="proyectos">
+      <div class="shead">
+        <span class="num">01 — Proyectos</span>
+        <h2>Cuatro sistemas, ninguno de ejercicio</h2>
+        <p>Cada uno resolvió un problema que existía antes de que yo escribiera la primera línea. Están ordenados por lo que más me enseñaron.</p>
+      </div>
+
+      <article class="proj">
+        <div class="lead">
+          <h3>AMICANA 2.0 <span class="tag">En producción</span></h3>
+          <p class="meta">
+            FastAPI · MySQL · MercadoPago · n8n<span class="sep">/</span>Python 3.11<br>
+            Instituto Cultural Argentino Norteamericano, Mendoza<span class="sep">/</span>2025–2026
+          </p>
+          <p class="desc">El instituto cobraba las cuotas a mano y conciliaba los pagos uno por uno. Hoy hay un sistema con tres roles, cobro integrado con MercadoPago Checkout Pro, auditoría de cada acción que modifica datos, y un asistente que responde consultas de alumnos fundamentado en la información real del instituto.</p>
+          <p class="desc">Lo usan alumnos y personal administrativo. Eso cambia cómo escribís el código: un bug acá no lo descubre un test, lo descubre alguien que quería pagar la cuota.</p>
+          <div class="links">
+            <a href="https://github.com/MartinZ18/Amicana-v2.0">Código →</a>
+            <a href="https://github.com/MartinZ18/Amicana-v2.0/tree/main/n8n">Workflows del RAG →</a>
+          </div>
+        </div>
+        <div class="detail">
+          <span class="dl">Lo técnico</span>
+          <ul>
+            <li><b>Asistente con RAG</b> — embeddings de 768 dimensiones en Postgres con pgvector, recuperación por similitud coseno, generación restringida al contexto recuperado. Si no sabe, deriva a secretaría en vez de inventar.</li>
+            <li><b>OCR de facturas</b> — extracción con un modelo de visión local (Ollama) y alternativa en la nube, con validación de CUIT por Módulo 11.</li>
+            <li><b>Auth</b> — JWT con roles, hashing con bcrypt, control de acceso por dependencia en cada endpoint protegido.</li>
+            <li><b>Verificación</b> — suite de regresión de 28 casos con Playwright, más tests de rutas con pytest y mocks.</li>
+            <li><b>Deploy</b> — Docker multi-stage y GitHub Actions que corre los tests antes de publicar.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="lead">
+          <h3>Inventario EGI</h3>
+          <p class="meta">
+            FastAPI · Kubernetes · MongoDB · SQL Server<span class="sep">/</span>Active Directory<br>
+            Inventario de equipamiento de laboratorio<span class="sep">/</span>2026
+          </p>
+          <p class="desc">Un inventario de equipos que tenía que autenticar contra el directorio corporativo existente y convivir con dos motores de base de datos distintos. La parte interesante no fue la API: fue la red.</p>
+          <p class="desc">Es el proyecto donde entendí que desplegar no es <span class="mono">docker run</span>. Segmentar, restringir tráfico entre pods y dejar el pipeline andando sobre un runner propio es trabajo de infraestructura, no un paso final.</p>
+          <div class="links">
+            <a href="https://github.com/MartinZ18/Proyecto-Inventario-EGI">Código →</a>
+          </div>
+        </div>
+        <div class="detail">
+          <span class="dl">Lo técnico</span>
+          <ul>
+            <li><b>Autenticación contra Active Directory</b> por LDAP, sin usuarios propios del sistema.</li>
+            <li><b>Dos motores de datos</b> — SQL Server para lo transaccional, MongoDB para lo documental.</li>
+            <li><b>Kubernetes con 7 NetworkPolicies</b> de tipo zero-trust: nada habla con nada salvo que esté declarado.</li>
+            <li><b>Firewall pfSense</b> y segmentación de red entre servicios.</li>
+            <li><b>CI/CD sobre runner self-hosted</b>, porque el entorno no salía a internet.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="lead">
+          <h3>Clasificador de incidentes por correo</h3>
+          <p class="meta">
+            n8n · Ollama · Gmail API · Telegram<span class="sep">/</span>LLM local<br>
+            Automatización de triage<span class="sep">/</span>2026
+          </p>
+          <p class="desc">Alguien tenía que leer la casilla de soporte y decidir qué escalaba. Ahora el flujo lee los correos, un modelo local clasifica gravedad, y solo llega una notificación a Telegram cuando efectivamente hay que mover a alguien.</p>
+          <p class="desc">Usé un modelo local a propósito: el contenido de los correos no sale de la máquina y no hay costo por token. Es el mismo criterio que aplico cuando un cliente pregunta cuánto le va a costar la automatización por mes.</p>
+          <div class="links">
+            <a href="https://github.com/MartinZ18/n8n-email-incident-classifier">Código y workflow →</a>
+          </div>
+        </div>
+        <div class="detail">
+          <span class="dl">Lo técnico</span>
+          <ul>
+            <li><b>Inferencia local con Ollama</b> — sin API de pago, sin datos saliendo de la red.</li>
+            <li><b>Salida estructurada</b> del modelo, para que la decisión de escalar sea un campo y no una interpretación de texto libre.</li>
+            <li><b>Manejo de errores explícito</b> — un JSON mal formado degrada el flujo, no lo tira abajo.</li>
+            <li><b>Notificación selectiva</b> — el valor no es avisar, es <em>no</em> avisar cuando no hace falta.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="lead">
+          <h3>Menu JPA</h3>
+          <p class="meta">
+            Java 17 · Spring Boot · JPA/Hibernate · MySQL<span class="sep">/</span>Spring Security<br>
+            Gestión gastronómica<span class="sep">/</span>2025–2026
+          </p>
+          <p class="desc">Una API REST con una jerarquía de entidades grande — menús, recetas, ingredientes, pedidos, mesas, personal — que es donde JPA deja de ser cómodo y hay que entender qué está haciendo.</p>
+          <p class="desc">Es también el proyecto donde más tests escribí, y donde una revisión de seguridad me encontró un IDOR y un endpoint sin límite de intentos. Los dos están corregidos y cubiertos.</p>
+          <div class="links">
+            <a href="https://github.com/MartinZ18/Menu_Jpa_Springboot">Código →</a>
+          </div>
+        </div>
+        <div class="detail">
+          <span class="dl">Lo técnico</span>
+          <ul>
+            <li><b>Spring Security con JWT</b> — filtro propio, BCrypt, autorización por rol.</li>
+            <li><b>18 archivos de tests</b> con JUnit 5 y Mockito sobre la capa de servicio.</li>
+            <li><b>Correcciones de seguridad</b> — IDOR en acceso a recursos ajenos y rate limiting en autenticación, ambos con test de regresión.</li>
+            <li><b>Documentación viva</b> con OpenAPI/Swagger generada desde el código.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== BUG ===== -->
+    <section id="bug">
+      <div class="shead">
+        <span class="num">02 — Un bug</span>
+        <h2>El índice que rompía el sistema en silencio</h2>
+        <p>Si tuviera que elegir una sola cosa para que mires, es esta. No por el bug — por cómo se encontró.</p>
+      </div>
+
+      <div class="case">
+        <div class="top">
+          <h3>Síntoma: el chatbot decía que no tenía información, con la información cargada</h3>
+          <p>El asistente de AMICANA contestaba <em>«el contexto disponible no incluye información sobre modalidades ni cuotas»</em> — con los cursos y las preguntas frecuentes efectivamente guardados en la base. El modelo se portaba perfecto: no alucinaba, decía la verdad sobre lo que le habían dado. El problema era que le estaban dando un solo documento.</p>
+          <p>La causa era un índice vectorial <code>ivfflat</code> creado con <code>lists = 100</code> sobre una tabla de <strong>nueve filas</strong>. Ese tipo de índice agrupa los vectores en listas y, por defecto, revisa <strong>una sola</strong>. Con nueve documentos repartidos en cien grupos, la búsqueda entraba a un grupo, encontraba un documento y devolvía uno.</p>
+          <p>No tiraba error. No tiraba warning. Devolvía <code>200 OK</code>.</p>
+        </div>
+
+        <div class="probe">
+          <div class="cell">
+            <span class="k">Pedí 3 resultados</span>
+            <span class="v">1</span>
+          </div>
+          <div class="cell">
+            <span class="k">Pedí 9 resultados</span>
+            <span class="v">1</span>
+          </div>
+          <div class="cell">
+            <span class="k">Pedí 50 resultados</span>
+            <span class="v">1</span>
+          </div>
+        </div>
+
+        <div class="bottom">
+          <span class="lbl">Cómo se confirmó</span>
+          <p>Formulé el diagnóstico como algo que se podía refutar: <em>si el problema es que el índice limita la búsqueda a una lista, entonces pedir más resultados va a seguir devolviendo uno</em>. Pedí 3, 9 y 50. Siempre uno. Hipótesis confirmada de una forma que la habría descartado si fuese falsa.</p>
+          <p>La solución fue <strong>borrar el índice</strong>. Con menos de mil filas, el escaneo secuencial es exacto y prácticamente instantáneo. El índice aproximado cambia precisión por velocidad — sobre nueve filas no había velocidad que ganar y sí precisión que perder.</p>
+          <span class="lbl" style="margin-top:22px">Lo que me llevé</span>
+          <p>Ese proyecto tuvo seis fallas reales y <strong>cinco de las seis devolvían <code>200 OK</code></strong>. En sistemas con modelos de lenguaje, «responde» y «funciona» son propiedades independientes: un servicio tradicional roto tira un 500, uno con LLM devuelve un párrafo bien redactado que suena razonable.</p>
+          <p>Los dos errores más caros fueron de exceso de prolijidad, no de descuido: el índice estaba puesto porque «es lo que se hace», y un <code>catch</code> vacío estaba puesto porque «hay que manejar los errores». Las dos decisiones se veían profesionales y las dos rompían el sistema.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MÉTODO ===== -->
+    <section id="metodo">
+      <div class="shead">
+        <span class="num">03 — Cómo trabajo</span>
+        <h2>Tres cosas que hago siempre</h2>
+      </div>
+      <div class="prin">
+        <div class="p">
+          <span class="n">01</span>
+          <h4>Entiendo el proceso manual antes de automatizarlo</h4>
+          <p>Una automatización resuelve poco si no sé exactamente qué problema real estoy sacando del medio. Primero miro cómo se hace hoy, con quién y por qué.</p>
+        </div>
+        <div class="p">
+          <span class="n">02</span>
+          <h4>Escribo tests para lo que hago</h4>
+          <p>En AMICANA eso significó pasar de «funciona en mi máquina» a una suite de regresión real que corre en cada cambio. No es burocracia: es lo que me deja tocar el código sin miedo.</p>
+        </div>
+        <div class="p">
+          <span class="n">03</span>
+          <h4>Ningún error se traga en silencio</h4>
+          <p>Degradar con elegancia y ocultar el error son cosas distintas. Si una falla es tolerable, la registro. Si no lo es, la propago. Lo que nunca hago es tragármela.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STACK ===== -->
+    <section id="stack">
+      <div class="shead">
+        <span class="num">04 — Stack</span>
+        <h2>Con qué trabajo</h2>
+        <p>Lo que uso de verdad en los proyectos de arriba, no una lista de todo lo que toqué alguna vez.</p>
+      </div>
+      <div class="stack">
+        <div class="grp">
+          <span class="h">Backend</span>
+          <div class="items"><b>Python</b> · FastAPI · Pydantic · pytest &nbsp;/&nbsp; <b>Java 17</b> · Spring Boot · Spring Security · JPA/Hibernate · JUnit 5 · Mockito</div>
+        </div>
+        <div class="grp">
+          <span class="h">Datos</span>
+          <div class="items"><b>MySQL</b> · <b>PostgreSQL</b> con pgvector · SQL Server · MongoDB &nbsp;/&nbsp; SQL directo, sin ORM cuando conviene</div>
+        </div>
+        <div class="grp">
+          <span class="h">IA y automatización</span>
+          <div class="items"><b>n8n</b> · RAG con embeddings y búsqueda vectorial · <b>Ollama</b> (inferencia local) · Groq · Gemini · salida estructurada y control de alucinaciones</div>
+        </div>
+        <div class="grp">
+          <span class="h">Infraestructura</span>
+          <div class="items"><b>Docker</b> · Kubernetes · GitHub Actions · Linux · pfSense · Active Directory / LDAP</div>
+        </div>
+        <div class="grp">
+          <span class="h">Integraciones</span>
+          <div class="items">MercadoPago Checkout Pro · Google OAuth · Gmail API · Google Sheets · Telegram Bot API</div>
+        </div>
+        <div class="grp">
+          <span class="h">Verificación</span>
+          <div class="items">Playwright · pytest · JUnit 5 · Mockito · revisión de seguridad y corrección de IDOR y rate limiting</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACTO ===== -->
+    <section id="contacto">
+      <div class="shead">
+        <span class="num">05 — Contacto</span>
+        <h2>Busco un rol junior de backend o automatización con IA</h2>
+        <p>Remoto o presencial en Mendoza. Si tenés algo dando vueltas o querés que te cuente cualquiera de estos proyectos en detalle, escribime.</p>
+      </div>
+      <div class="contact">
+        <div class="blk">
+          <span class="k">Email</span>
+          <a href="mailto:martin.zamora004@gmail.com">martin.zamora004@gmail.com</a>
+        </div>
+        <div class="blk">
+          <span class="k">GitHub</span>
+          <a href="https://github.com/MartinZ18">github.com/MartinZ18</a>
+        </div>
+        <div class="blk">
+          <span class="k">LinkedIn</span>
+          <a href="https://www.linkedin.com/in/martin-zamora-3893b8295">Martín Zamora</a>
+        </div>
+        <div class="blk">
+          <span class="k">Ubicación</span>
+          <span>Mendoza, Argentina</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>Martín Zamora — Mendoza, Argentina</span>
+      <span>Hecho a mano. Sin framework.</span>
+    </footer>
+
+  </main>
+</div>
+</div>
+
+</body>
+</html>
