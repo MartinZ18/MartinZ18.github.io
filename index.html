@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Martín Zamora — Backend &amp; AI Automation</title>
-<meta name="description" content="Backend developer en Mendoza, Argentina. APIs REST con FastAPI y Spring Boot, y automatización de procesos con n8n e IA. Sistemas en producción con usuarios reales.">
+<meta name="description" content="Backend developer en Mendoza, Argentina. APIs REST con FastAPI y Spring Boot, y automatización de procesos con n8n e IA. Proyectos personales construidos de punta a punta: API, tests, deploy y documentación.">
 <meta property="og:title" content="Martín Zamora — Backend &amp; AI Automation">
-<meta property="og:description" content="APIs REST y automatización con IA. Sistemas en producción, no ejercicios de curso.">
+<meta property="og:description" content="APIs REST y automatización con IA. Proyectos personales construidos de punta a punta.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -323,7 +323,7 @@ footer{
 
     <header class="hero">
       <h1>Martín<br>Zamora</h1>
-      <p class="thesis">Construyo APIs REST y saco procesos manuales del medio con automatización e IA. <b>Tengo software en producción usándose todos los días</b> en un instituto de Mendoza.</p>
+      <p class="thesis">Construyo APIs REST y saco procesos manuales del medio con automatización e IA. Son <b>proyectos personales, ninguno en producción</b> — pero cada uno está construido completo: API, tests, deploy y documentación.</p>
 
       <div class="facts">
         <div class="fact">
@@ -355,19 +355,19 @@ footer{
     <section id="proyectos">
       <div class="shead">
         <span class="num">01 — Proyectos</span>
-        <h2>Cuatro sistemas, ninguno de ejercicio</h2>
-        <p>Cada uno resolvió un problema que existía antes de que yo escribiera la primera línea. Están ordenados por lo que más me enseñaron.</p>
+        <h2>Cuatro proyectos personales</h2>
+        <p>Ninguno está en producción. Cada uno parte de un problema concreto y está construido como si fuera a estarlo. Están ordenados por lo que más me enseñaron.</p>
       </div>
 
       <article class="proj">
         <div class="lead">
-          <h3>AMICANA 2.0 <span class="tag">En producción</span></h3>
+          <h3>AMICANA 2.0 <span class="tag">Proyecto personal</span></h3>
           <p class="meta">
             FastAPI · MySQL · MercadoPago · n8n<span class="sep">/</span>Python 3.11<br>
-            Instituto Cultural Argentino Norteamericano, Mendoza<span class="sep">/</span>2025–2026
+            Gestión académica para un instituto de idiomas<span class="sep">/</span>2025–2026
           </p>
-          <p class="desc">El instituto cobraba las cuotas a mano y conciliaba los pagos uno por uno. Hoy hay un sistema con tres roles, cobro integrado con MercadoPago Checkout Pro, auditoría de cada acción que modifica datos, y un asistente que responde consultas de alumnos fundamentado en la información real del instituto.</p>
-          <p class="desc">Lo usan alumnos y personal administrativo. Eso cambia cómo escribís el código: un bug acá no lo descubre un test, lo descubre alguien que quería pagar la cuota.</p>
+          <p class="desc">Parte de un escenario concreto: un instituto que cobra las cuotas a mano y concilia los pagos uno por uno. El sistema tiene tres roles, cobro integrado con MercadoPago Checkout Pro, auditoría de cada acción que modifica datos, y un asistente que responde consultas de alumnos fundamentado en la información real del instituto.</p>
+          <p class="desc">No está desplegado para el instituto: es un proyecto mío. Lo construí como si lo fuera a estar — cada acción que modifica datos queda auditada y la suite de regresión corre antes de cada deploy.</p>
           <div class="links">
             <a href="https://github.com/MartinZ18/Amicana-v2.0">Código →</a>
             <a href="https://github.com/MartinZ18/Amicana-v2.0/tree/main/n8n">Workflows del RAG →</a>
@@ -392,7 +392,7 @@ footer{
             FastAPI · Kubernetes · MongoDB · SQL Server<span class="sep">/</span>Active Directory<br>
             Inventario de equipamiento de laboratorio<span class="sep">/</span>2026
           </p>
-          <p class="desc">Un inventario de equipos que tenía que autenticar contra el directorio corporativo existente y convivir con dos motores de base de datos distintos. La parte interesante no fue la API: fue la red.</p>
+          <p class="desc">Un inventario de equipos que tenía que autenticar contra un Active Directory y convivir con dos motores de base de datos distintos. La parte interesante no fue la API: fue la red.</p>
           <p class="desc">Es el proyecto donde entendí que desplegar no es <span class="mono">docker run</span>. Segmentar, restringir tráfico entre pods y dejar el pipeline andando sobre un runner propio es trabajo de infraestructura, no un paso final.</p>
           <div class="links">
             <a href="https://github.com/MartinZ18/Proyecto-Inventario-EGI">Código →</a>
@@ -417,8 +417,8 @@ footer{
             n8n · Ollama · Gmail API · Telegram<span class="sep">/</span>LLM local<br>
             Automatización de triage<span class="sep">/</span>2026
           </p>
-          <p class="desc">Alguien tenía que leer la casilla de soporte y decidir qué escalaba. Ahora el flujo lee los correos, un modelo local clasifica gravedad, y solo llega una notificación a Telegram cuando efectivamente hay que mover a alguien.</p>
-          <p class="desc">Usé un modelo local a propósito: el contenido de los correos no sale de la máquina y no hay costo por token. Es el mismo criterio que aplico cuando un cliente pregunta cuánto le va a costar la automatización por mes.</p>
+          <p class="desc">El escenario: una casilla de soporte que alguien tiene que leer para decidir qué escala. El flujo lee los correos, un modelo local clasifica gravedad, y solo llega una notificación a Telegram cuando efectivamente hay que mover a alguien.</p>
+          <p class="desc">Usé un modelo local a propósito: el contenido de los correos no sale de la máquina y no hay costo por token. Es el criterio que aplicaría cuando un cliente pregunte cuánto le va a costar la automatización por mes.</p>
           <div class="links">
             <a href="https://github.com/MartinZ18/n8n-email-incident-classifier">Código y workflow →</a>
           </div>
