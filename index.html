@@ -355,7 +355,7 @@ footer{
     <section id="proyectos">
       <div class="shead">
         <span class="num">01 — Proyectos</span>
-        <h2>Cuatro proyectos personales</h2>
+        <h2>Cinco proyectos personales</h2>
         <p>Ninguno está en producción. Cada uno parte de un problema concreto y está construido como si fuera a estarlo. Están ordenados por lo que más me enseñaron.</p>
       </div>
 
@@ -430,6 +430,31 @@ footer{
             <li><b>Salida estructurada</b> del modelo, para que la decisión de escalar sea un campo y no una interpretación de texto libre.</li>
             <li><b>Manejo de errores explícito</b> — un JSON mal formado degrada el flujo, no lo tira abajo.</li>
             <li><b>Notificación selectiva</b> — el valor no es avisar, es <em>no</em> avisar cuando no hace falta.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="lead">
+          <h3>job-radar</h3>
+          <p class="meta">
+            Python · Groq · Obsidian · Telegram<span class="sep">/</span>Windows Task Scheduler<br>
+            Radar de búsqueda laboral<span class="sep">/</span>2026
+          </p>
+          <p class="desc">Lo armé para mi propia búsqueda de trabajo: revisar cinco bolsas a mano tres veces por semana no escalaba. Corre solo en mi PC, trae las vacantes nuevas, filtra las que encajan con mi perfil, las suma a un tracker en Excel y me avisa por Telegram.</p>
+          <p class="desc">Lo uso todas las semanas, así que lo diseñé para fallar en voz alta: si una bolsa cambia su HTML y deja de devolver avisos, me entero por Telegram en vez de descubrirlo un mes después.</p>
+          <div class="links">
+            <a href="https://github.com/MartinZ18/job-radar">Código →</a>
+          </div>
+        </div>
+        <div class="detail">
+          <span class="dl">Lo técnico</span>
+          <ul>
+            <li><b>Cinco fuentes</b> por API, RSS o HTML, con deduplicación por link y por título + empresa. LinkedIn queda afuera a propósito: sus términos prohíben el scraping.</li>
+            <li><b>Excel como base de datos</b> — solo agrega filas, conserva fórmulas y formato, y guarda como texto todo lo que llega de afuera para que un aviso nunca se ejecute como fórmula.</li>
+            <li><b>Aviso de fuentes rotas</b> — cuenta corridas seguidas sin datos y avisa una sola vez; si Telegram falla, reintenta en la próxima.</li>
+            <li><b>Radar de entrevistas con LLM</b> — Groq extrae preguntas y proyectos de foros en modo JSON, se normaliza cada ítem antes de guardarlo, y hay tope de posts por corrida para quedarse en el free tier.</li>
+            <li><b>16 tests end-to-end</b> que corren la cadena completa con HTTP y Telegram simulados.</li>
           </ul>
         </div>
       </article>
