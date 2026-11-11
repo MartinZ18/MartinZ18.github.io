@@ -355,9 +355,35 @@ footer{
     <section id="proyectos">
       <div class="shead">
         <span class="num">01 — Proyectos</span>
-        <h2>Cinco proyectos personales</h2>
+        <h2>Seis proyectos personales</h2>
         <p>Ninguno está en producción. Cada uno parte de un problema concreto y está construido como si fuera a estarlo. Están ordenados por lo que más me enseñaron.</p>
       </div>
+
+      <article class="proj">
+        <div class="lead">
+          <h3>ig-assistant</h3>
+          <p class="meta">
+            n8n · ManyChat · Groq · Google Apps Script<span class="sep">/</span>Telegram<br>
+            Asistente de Instagram para una tienda<span class="sep">/</span>2026
+          </p>
+          <p class="desc">Una tienda chica que contesta los mensajes de Instagram a mano. ManyChat manda cada mensaje a un webhook de n8n, un modelo responde desde el catálogo y, antes de enviar nada, el flujo revisa la respuesta con controles escritos en código.</p>
+          <p class="desc">La tienda y el catálogo son ficticios y nunca lo conecté a una cuenta real de ManyChat. El README separa lo que está probado de lo que no.</p>
+          <div class="links">
+            <a href="https://github.com/MartinZ18/ig-assistant">Código →</a>
+            <a href="https://github.com/MartinZ18/ig-assistant/blob/main/reports/e2e-report.md">Informe de pruebas →</a>
+          </div>
+        </div>
+        <div class="detail">
+          <span class="dl">Lo técnico</span>
+          <ul>
+            <li><b>Control de precios en código</b> — si la respuesta cita un precio que no figura en el catálogo, se reemplaza por un mensaje de derivación a una persona. No depende del prompt.</li>
+            <li><b>Respaldo en menos de 5 s</b> — timeout, error del proveedor o JSON inválido terminan en una respuesta fija y un aviso al dueño por Telegram.</li>
+            <li><b>El modelo no decide efectos</b> — no tiene herramientas; n8n registra el lead o avisa según la intención que devuelve.</li>
+            <li><b>Límite de mensajes</b> por contacto y por cuenta, para acotar el gasto aunque alguien rote de usuario.</li>
+            <li><b>21 tests end-to-end</b> contra el contenedor real de n8n, con el modelo, Telegram y la planilla simulados.</li>
+          </ul>
+        </div>
+      </article>
 
       <article class="proj">
         <div class="lead">
@@ -522,6 +548,7 @@ footer{
           <span class="lbl" style="margin-top:22px">Lo que me llevé</span>
           <p>Ese proyecto tuvo seis fallas reales y <strong>cinco de las seis devolvían <code>200 OK</code></strong>. En sistemas con modelos de lenguaje, «responde» y «funciona» son propiedades independientes: un servicio tradicional roto tira un 500, uno con LLM devuelve un párrafo bien redactado que suena razonable.</p>
           <p>Los dos errores más caros fueron de exceso de prolijidad, no de descuido: el índice estaba puesto porque «es lo que se hace», y un <code>catch</code> vacío estaba puesto porque «hay que manejar los errores». Las dos decisiones se veían profesionales y las dos rompían el sistema.</p>
+          <p>Las seis fallas, con el código y cómo diagnostiqué cada una, están en <a href="https://github.com/MartinZ18/rag-explicado">rag-explicado</a>.</p>
         </div>
       </div>
     </section>
